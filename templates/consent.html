@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Consent - LAN Hacking Simulator</title>
+  <style>
+    body { font-family: monospace; background-color: #111; color: #0f0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+    button { margin: 20px; padding: 10px 20px; background-color: #222; color: #0f0; border: 1px solid #0f0; cursor: pointer; }
+    button:hover { background-color: #0f0; color: #111; }
+    h2 { color: #0ff; }
+  </style>
+</head>
+<body>
+  <h2>Consent Required</h2>
+  <p>This simulator is for educational and forensic demonstration only.<br>All data is stored locally and never shared.</p>
+  <form action="/dashboard" method="post">
+    <button name="accept" value="yes" type="submit">I Accept</button>
+  </form>
+</body>
+</html>

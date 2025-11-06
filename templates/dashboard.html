@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LAN Hacking Simulator Dashboard</title>
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #111;
+      color: #0f0;
+      padding: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px;
+      background-color: #222;
+      color: #0f0;
+      border: 1px solid #0f0;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0f0;
+      color: #111;
+    }
+    h2 {
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <h2>Welcome, {{ user }}</h2>
+  <p>This dashboard simulates forensic triggers in a LAN-only environment.</p>
+
+  <button onclick="fetch('/trigger/ip')">Trigger IP Logger</button>
+  <button onclick="fetch('/trigger/fingerprint')">Trigger Fingerprint</button>
+  <button onclick="window.location.href='/webcam'">Trigger Webcam Consent</button>
+  <button onclick="getLocation()">Trigger Location Logger</button>
+
+  <script>
+    // Battery Logger
+    document.addEventListener("DOMContentLoaded", function() {
+      if (navigator.getBattery) {
+        navigator.getBattery().then(function(battery) {
+          const status = {
+            charging: battery.charging,
+            level: battery.level,
+            timestamp: new Date().toISOString()
+          };
+          fetch('/trigger/battery', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(status)
+          });
+        });
+      } else {
+        console.log("Battery API not supported.");
+      }
+    });
+
+    // Location Logger
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function(position) {
+            fetch('/trigger/location', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                lat: position.coords.latitude,
+                lon: position.coords.longitude,
+                timestamp: new Date().toISOString()
+              })
+            });
+          },
+          function(error) {
+            console.log("Location error:", error.message);
+          }
+        );
+      } else {
+        console.log("Geolocation not supported.");
+      }
+    }
+  </script>
+</body>
+</html>
