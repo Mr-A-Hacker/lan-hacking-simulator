@@ -1,3 +1,10 @@
+> ## 👋 Start Here
+> A controlled LAN cybersecurity simulation. **For users:** explore security concepts through a local dashboard and simulated events rather than attacking real systems. Use only with informed consent.
+>
+> **Safety:** Use security, camera, and network features only on systems and networks you own or are explicitly authorized to test.
+
+---
+
 # 🧠 LAN Hacking Simulator
 
 **Author:** [Mr-A-Hacker](https://github.com/Mr-A-Hacker)  
